@@ -1,0 +1,8 @@
+Use case: photorealistic-natural
+Asset type: panoramic services hero for a premium Sri Lanka travel guide website, landscape 3:2
+Primary request: an editorial cinematic photograph of a winding hill-country road between lush Sri Lankan tea plantations, layered mountain ridges receding into mist.
+Composition/framing: dramatic winding road leads from the lower left foreground toward the middle distance, full-bleed scenic texture and natural depth, high quality travel magazine photography, landscape 3:2.
+Lighting/mood: gentle sunrise with natural warm golden light, calm and inviting atmosphere.
+Color palette: botanical tea greens, warm ochre highlights, deep ink shadows, restrained natural saturation.
+Materials/textures: realistic tea bushes, narrow paved country road, wisps of atmospheric mountain mist.
+Constraints: no vehicles, no people, no logos, no text, no watermark, no map doodles, no paper borders. Authentic natural landscape mood; do not imply a particular company's service or property.
