@@ -1,0 +1,11 @@
+---
+import { copy, type Language } from '../data/site';
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const t = copy[lang];
+---
+<section class="route-footer r-next-route-section map-region" data-region="next-route-section" aria-label={t.routeEn}>
+  <div class="route-footer-title"><h2>{t.routeTitle}</h2><small>{t.routeEn}</small></div>
+  <div class="route-steps">{t.routeNames.map((name, i) => <div class="route-step"><span class="route-node"></span><span class="route-step-name">{name}</span><small>{t.regions[i].en}</small></div>)}</div>
+  <div class="route-footer-preview"><p>{t.packagesHeading}<small>{t.packagesEn}</small></p><span>{t.packagesSub}</span></div>
+  <a class="button button-outline route-footer-link" href={lang === 'ja' ? '/packages/' : '/en/packages/'}>{t.packagesLink}<span aria-hidden="true">→</span></a>
+</section>

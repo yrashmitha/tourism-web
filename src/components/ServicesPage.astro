@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
+import { pagePath, type Language } from '../data/site';
+import '../styles/journeys.css';
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const ja = lang === 'ja';
+const services = ja ? [
+  { id: 'route', title: 'あなただけの旅程', short: '旅程', body: '海辺でのんびりする日も、高原を歩く朝も。行きたい場所を並べて、無理のない旅の流れを一緒に考えましょう。', points: ['旅の日数と出発地', '気になる場所や体験', '休憩や自由時間の取り方'], message: '旅程づくりについて相談したいです。' },
+  { id: 'guide', title: '景色の、その先へ', short: 'ガイド', body: '寺院の背景や街の日常など、場所を知ると旅はもっと深くなります。ガイドをご希望のエリアや言語をお聞かせください。', points: ['寺院や歴史ある街の散策', '文化や暮らしにふれる体験', 'ガイドの言語と対応可能な日程'], message: '現地ガイドについて相談したいです。希望する言語もお伝えします。' },
+  { id: 'travel', title: '道のりも、旅の一部に', short: '移動', body: '空港から最初の滞在先へ、海岸から高原へ。出発・到着の時間や荷物の量に合わせて、移動の選択肢をご相談ください。', points: ['空港とホテル間の移動', '旅程に合わせた都市間の移動', '人数・荷物・途中の立ち寄り'], message: '空港送迎や島内の移動について相談したいです。' },
+  { id: 'stay', title: '一日を結ぶ、滞在先', short: '宿泊', body: '波の音で目覚める朝、涼しい高原で過ごす夜。エリアやご予算、旅のスタイルに合う宿泊先について相談できます。', points: ['泊まりたいエリアとご予算', '部屋のタイプや必要な設備', '予約条件と料金に含まれる内容'], message: '旅程に合う宿泊先について相談したいです。' },
+  { id: 'tickets', title: '体験への一枚を', short: 'チケットの相談', body: '列車で高原へ、気になる場所や体験へ。必要なチケットや予約方法を、旅程と合わせて確認しましょう。', points: ['希望する日付・区間・体験', '空き状況と予約できる時期', '料金、変更・キャンセル条件'], message: '旅程に必要なチケットや予約について相談したいです。' },
+  { id: 'assistance', title: '小さな疑問も、旅の相談に', short: '旅のサポート', body: '到着時間や待ち合わせ、旅先で必要なこと。出発前に気になる点を整理し、連絡方法や対応できる内容をご確認ください。', points: ['到着と待ち合わせの確認', '旅程の変更や特別なご希望', '現地での連絡方法と対応時間'], message: '旅のサポート内容や現地での連絡方法について相談したいです。' },
+] : [
+  { id: 'route', title: 'An itinerary with your rhythm', short: 'Your route', body: 'Slow mornings by the sea or an early start in the hills? Bring the places that interest you, and discuss a route with room to enjoy them.', points: ['Your dates and starting point', 'Places and experiences you love', 'Time for stops and unplanned moments'], message: 'Hello, I would like help shaping a personal Sri Lanka itinerary.' },
+  { id: 'guide', title: 'A little closer to the island', short: 'Local guiding', body: 'A temple, a neighbourhood, an everyday ritual. Ask about guiding that brings context to the places you visit, with your preferred language confirmed in advance.', points: ['Culture and historic places', 'Local life and landscape', 'Guide language and availability'], message: 'Hello, I would like to discuss local guiding and available guide languages.' },
+  { id: 'travel', title: 'Make the road part of the trip', short: 'Getting around', body: 'From your airport arrival to the road between coast and highlands, discuss transport around your timing, group size and luggage.', points: ['Airport and hotel transfers', 'Travel between destinations', 'Your group, luggage and stops'], message: 'Hello, I would like to ask about airport transfers and transport for my itinerary.' },
+  { id: 'stay', title: 'Somewhere to settle in', short: 'Your stay', body: 'Wake near the ocean or linger in the cool of the hills. Ask about accommodation options that suit the places, pace and budget you have in mind.', points: ['Location and budget', 'Room preferences and facilities', 'Booking terms and what is included'], message: 'Hello, I would like to discuss accommodation options for my Sri Lanka journey.' },
+  { id: 'tickets', title: 'A ticket to what moves you', short: 'Ticket booking', body: 'A train through the hills, a place you want to visit, an experience worth planning ahead for. Discuss the tickets your itinerary needs and the options available.', points: ['Your dates, route and experiences', 'Availability and booking windows', 'Fares, changes and cancellation terms'], message: 'Hello, I would like to ask about tickets and reservations for my itinerary.' },
+  { id: 'assistance', title: 'A little clarity along the way', short: 'Travel assistance', body: 'Arrival details, meeting points, or a change of plan. Bring your questions into the conversation and confirm how to stay in contact during your trip.', points: ['Arrival and meeting arrangements', 'Schedule changes and special requests', 'Contact details and support hours'], message: 'Hello, I would like to ask about travel assistance and how to contact you during my trip.' },
+];
+const steps = ja ? [
+  { title: '旅の希望を送る', body: '時期、人数、行ってみたい場所。決まっていることからWhatsAppでお知らせください。' },
+  { title: 'ルートを考える', body: '日数や移動のペースに合わせて、立ち寄り先や必要な手配を相談します。' },
+  { title: '詳細を確認する', body: '料金、空き状況、含まれる内容、予約条件を確認してから旅を決めましょう。' },
+] : [
+  { title: 'Share your starting point', body: 'Send your dates, group size and a few places you have in mind. A WhatsApp message is enough to begin.' },
+  { title: 'Shape the journey', body: 'Discuss the route, the pace and which arrangements you would like help with.' },
+  { title: 'Bring the details together', body: 'Confirm availability, the quote, inclusions and booking terms before making your plans final.' },
+];
+---
+<BaseLayout lang={lang} page="services">
+  <main id="main" class="travel-page services-page">
+    <section class="services-hero travel-wrap">
+      <div class="services-hero-heading">
+        <h1 class="travel-display">{ja ? '心が動く方へ。\n旅は、あなたのペースで。' : 'Follow your curiosity.\nTravel at your pace.'}</h1>
+        <div><p class="travel-lead">{ja ? '旅程、ガイド、移動、宿泊、チケットのことまで。旅の細かなことを相談して、島で過ごす時間をもっと楽しみましょう。' : 'Your itinerary, guiding, transport, stays and tickets. Talk through the details, and make room for the Sri Lanka you came to discover.'}</p><WhatsAppLink lang={lang} label={ja ? '旅のプランを相談する' : 'Let’s shape your journey'} /></div>
+      </div>
+      <figure class="services-panorama">
+        <img src="/images/journey-road.webp" width="1536" height="1024" alt={ja ? '茶畑と霧の山々の間を曲がりくねる、スリランカ高原の道のイメージ' : 'A winding road through Sri Lankan tea country and misty hills, an illustrative travel scene'} fetchpriority="high" />
+        <figcaption><span>{ja ? '道のりにも、心に残る景色を。' : 'Leave room for the scenic route.'}</span><svg viewBox="0 0 80 30" aria-hidden="true"><path d="M2 24C18 24 12 6 32 6S50 25 76 10"/><circle cx="76" cy="10" r="3"/></svg></figcaption>
+      </figure>
+      <nav class="services-route" aria-label={ja ? '旅のサービス' : 'Travel services'}>{services.map(service => <a href={`#service-${service.id}`}><span class="service-stop" aria-hidden="true"></span>{service.short}<span aria-hidden="true">↗</span></a>)}</nav>
+    </section>
+
+    <section class="service-ledger travel-wrap" aria-labelledby="service-heading">
+      <div class="service-ledger-intro"><h2 id="service-heading">{ja ? '旅のかたちを、\n一緒に。' : 'The details matter.\nSo does the feeling.'}</h2><p>{ja ? 'どこへ行くかだけでなく、どう過ごしたいか。その気持ちを出発点に、必要なサポートをご相談ください。' : 'Tell us how you want the trip to feel, as well as where you want to go. Start with the support that matters to you.'}</p><img src="/images/island-locator.webp" width="480" height="720" alt="" aria-hidden="true" loading="lazy" /><a class="text-link" href={pagePath(lang, 'packages')}>{ja ? '旅のパッケージから考える' : 'Start with a journey idea'} <span aria-hidden="true">↗</span></a></div>
+      <div class="service-ledger-entries">{services.map((service, i) => <details class="service-detail" id={`service-${service.id}`} open={i === 0}>
+        <summary><svg class="service-symbol" viewBox="0 0 32 32" aria-hidden="true">{i === 0 ? <><path d="m3 8 8-4 10 4 8-4v20l-8 4-10-4-8 4Z M11 4v20 M21 8v20"/></> : i === 1 ? <><circle cx="16" cy="16" r="12"/><path d="m21 11-3 7-7 3 3-7Z"/></> : i === 2 ? <><path d="m6 12 3-7h14l3 7v12H6Z M6 13h20 M10 18h2 M20 18h2 M9 24v3 M23 24v3"/></> : i === 3 ? <><path d="M5 28V10h22v18 M11 10V5h10v5 M2 28h28 M11 16h2 M19 16h2 M11 21h2 M19 21h2"/></> : i === 4 ? <><path d="M4 8h24v6a3 3 0 0 0 0 6v5H4v-5a3 3 0 0 0 0-6Z M21 8v4m0 3v3m0 3v4"/></> : <><path d="M5 6h22v16H14l-7 5v-5H5Z M10 12h12 M10 17h8"/></>}</svg><h3>{service.title}</h3><span class="disclosure-mark" aria-hidden="true"></span></summary>
+        <div class="service-detail-body"><p>{service.body}</p><ul>{service.points.map(point => <li>{point}</li>)}</ul><WhatsAppLink lang={lang} label={ja ? 'このサービスについて相談' : 'Talk about this service'} message={service.message} class="text-link whatsapp-text-link" /></div>
+      </details>)}</div>
+      <p class="service-availability">{ja ? 'サービス内容・ガイドの言語・空き状況は、日程や旅程に合わせて事前にご確認ください。' : 'Services, guide languages and availability are confirmed around your itinerary and dates.'}</p>
+    </section>
+
+    <section class="planning-path"><div class="travel-wrap"><div class="planning-path-heading"><h2>{ja ? 'はじまりは、\nひとつのメッセージ。' : 'A good journey starts\nwith a conversation.'}</h2><p>{ja ? 'すべてが決まっていなくても大丈夫。' : 'You don’t need to have it all figured out.'}</p></div><ol>{steps.map((step, i) => <li><span class="planning-step">{String(i + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol></div></section>
+
+    <section class="travel-invitation travel-wrap"><div><h2>{ja ? 'あなたの「行ってみたい」を、\n聞かせてください。' : 'What’s on\nyour Sri Lanka wish list?'}</h2><p>{ja ? '気になる場所をひとつでも。WhatsAppで、旅の話を始めましょう。' : 'One place, a few dates, or just a feeling. Send a message and start putting your journey together.'}</p></div><WhatsAppLink lang={lang} label={ja ? 'WhatsAppで相談する' : 'Start the conversation'} /></section>
+  </main>
+</BaseLayout>
+<script>
+  const openService = (id: string) => {
+    const detail = document.getElementById(id);
+    if (detail instanceof HTMLDetailsElement && detail.classList.contains('service-detail')) detail.open = true;
+  };
+  document.querySelectorAll<HTMLAnchorElement>('.services-route a').forEach(link => {
+    link.addEventListener('click', () => openService(link.hash.slice(1)));
+  });
+  window.addEventListener('hashchange', () => openService(window.location.hash.slice(1)));
+  openService(window.location.hash.slice(1));
+</script>

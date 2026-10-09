@@ -1,0 +1,141 @@
+---
+import WhatsAppLink from './WhatsAppLink.astro';
+import { journeys } from '../data/journeys';
+import type { Language } from '../data/site';
+import '../styles/home-sections.css';
+
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const ja = lang === 'ja';
+const base = ja ? '' : '/en';
+const featured = journeys.find(journey => journey.days === 6)!;
+const shorterJourneys = journeys.filter(journey => journey.days !== 6);
+const serviceIds = ['route', 'guide', 'travel', 'stay', 'tickets', 'assistance'];
+const duration = (days: number, nights: number) => ja
+  ? `${days}日間${nights ? `・${nights}泊` : ''}`
+  : `${days} ${days === 1 ? 'day' : 'days'}${nights ? ` / ${nights} ${nights === 1 ? 'night' : 'nights'}` : ''}`;
+const services = ja ? [
+  { title: '旅のプランづくり', text: '行きたい場所と過ごしたい時間から、無理のないルートを相談。' },
+  { title: '現地でのガイド', text: '街や文化の背景を知る旅へ。対応言語は事前にご確認ください。' },
+  { title: '移動の手配', text: '空港から旅先まで。人数や荷物に合わせた移動方法を相談。' },
+  { title: '宿泊先の相談', text: '旅のペース、エリア、ご予算に合わせて宿泊先を検討。' },
+  { title: 'チケットの相談', text: '訪問先や体験の予約について、手配方法と空き状況を確認。' },
+  { title: '旅のサポート', text: '出発前の疑問から現地での予定まで、必要なサポートを相談。' },
+] : [
+  { title: 'Itinerary planning', text: 'Connect the places you love with a pace that suits your days.' },
+  { title: 'Local guiding', text: 'Explore the stories behind each stop. Confirm your preferred language before booking.' },
+  { title: 'Transport arrangements', text: 'Discuss airport transfers and travel between stops for your group and luggage.' },
+  { title: 'Places to stay', text: 'Explore accommodation choices around your route, budget and travel style.' },
+  { title: 'Tickets & experiences', text: 'Ask about reservations, availability and arrangements for your chosen visits.' },
+  { title: 'Trip assistance', text: 'Talk through practical questions before departure and the support you need on your trip.' },
+];
+const faqs = ja ? [
+  { question: '旅の相談は、どのように始めますか？', answer: 'WhatsAppで、ご旅行の日程、人数、気になる場所をお送りください。まだ予定が決まっていなくても、希望する旅の雰囲気からご相談いただけます。' },
+  { question: '料金や、旅に含まれるものは？', answer: '行程、人数、時期、宿泊先や移動方法により異なります。お申し込み前に、料金と含まれるもの・含まれないものを個別にご確認ください。掲載ルートは旅を考えるための提案です。' },
+  { question: 'パッケージの行程を変更できますか？', answer: '掲載のルートを出発点に、行きたい場所や滞在時間をご相談ください。移動時間、空き状況、当日の条件などを踏まえて、実際の行程を確認します。' },
+  { question: '日本語でのガイドは可能ですか？', answer: 'サイトは日本語と英語でご覧いただけます。ガイドの対応言語は日程や手配内容によりますので、ご希望の言語を最初のメッセージに添えて、予約前にご確認ください。' },
+] : [
+  { question: 'How do I start planning?', answer: 'Send a WhatsApp message with your travel dates, group size and places you are curious about. If your plans are still open, start with the kind of trip you would enjoy.' },
+  { question: 'What will my trip cost, and what is included?', answer: 'The price depends on your itinerary, group, dates, accommodation and transport. Confirm the quote, inclusions and exclusions before booking. The routes shown here are starting points for planning.' },
+  { question: 'Can I change a package itinerary?', answer: 'Use any route as a starting point and discuss the places you want to add or the time you want to spend. Your final itinerary will take travel time, availability and local conditions into account.' },
+  { question: 'Can I request a Japanese-speaking guide?', answer: 'This website is available in Japanese and English. Guide language availability depends on your dates and arrangements. Include your preferred language in your first message and confirm it before booking.' },
+];
+---
+<div class="home-discovery">
+  <section class="home-journeys home-content-wrap" aria-labelledby="home-journeys-title">
+    <header class="home-section-heading">
+      <div>
+        <h2 id="home-journeys-title">{ja ? '何日あれば、\nどこまで行ける？' : 'A day away.\nOr a whole island story.'}</h2>
+        <p>{ja ? '1日から6日まで。気になるルートを見つけて、あなたの旅へと育てていきましょう。' : 'From one day in the wild to six days of changing scenery. Find a route that feels like your kind of journey.'}</p>
+      </div>
+      <a class="home-editorial-link" href={`${base}/packages/`}>{ja ? 'すべてのパッケージを見る' : 'Explore every journey'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+    </header>
+    <div class="home-journey-spread">
+      <article class="home-featured-journey">
+        <a class="home-featured-image" href={`${base}/packages/#${featured.id}`} aria-label={ja ? `${featured.title[lang]}の行程を見る` : `Explore ${featured.title[lang]}`}>
+          <img src={featured.image} alt={ja ? '南海岸の町と海を結ぶルートのイメージ' : 'An illustrated route along Sri Lanka’s southern coastline'} loading="lazy" width="1498" height="1026" />
+          <span class="home-journey-duration">{duration(featured.days, featured.nights)}</span>
+        </a>
+        <div class="home-featured-copy">
+          <h3><a href={`${base}/packages/#${featured.id}`}>{featured.title[lang]}</a></h3>
+          <p>{featured.summary[lang]}</p>
+          <p class="home-route-stops">{featured.route[lang]}</p>
+          <a class="home-editorial-link" href={`${base}/packages/#${featured.id}`}>{ja ? '6日間の旅を見る' : 'Follow the six-day route'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+        </div>
+      </article>
+      <div class="home-short-journeys">
+        {shorterJourneys.map(journey => (
+          <article class="home-journey-row">
+            <a class="home-journey-thumbnail" href={`${base}/packages/#${journey.id}`} aria-label={ja ? `${journey.title[lang]}の行程を見る` : `Explore ${journey.title[lang]}`}>
+              <img src={journey.image} alt="" loading="lazy" width="400" height="400" />
+            </a>
+            <div class="home-journey-row-copy">
+              <span class="home-row-duration">{duration(journey.days, journey.nights)}</span>
+              <h3><a href={`${base}/packages/#${journey.id}`}>{journey.title[lang]}</a></h3>
+              <p>{journey.summary[lang]}</p>
+              <a class="home-row-link" href={`${base}/packages/#${journey.id}`}>{ja ? '行程を見る' : 'View itinerary'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+            </div>
+          </article>
+        ))}
+        <p class="home-route-note">{ja ? 'どのルートも、ご希望に合わせて相談できます。日程・料金・手配内容は予約前にご確認ください。' : 'Each route is a starting point. Discuss your dates, preferences and final arrangements before booking.'}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-approach" aria-labelledby="home-approach-title">
+    <div class="home-approach-photo">
+      <img src="/images/journey-road.webp" alt={ja ? '朝の光と霧に包まれた茶畑を抜ける山道' : 'A winding road through tea plantations in the morning mist'} width="1536" height="1024" loading="lazy" />
+      <p>{ja ? '寄り道も、旅の一部。' : 'Leave a little room for the journey.'}</p>
+    </div>
+    <div class="home-approach-copy">
+      <h2 id="home-approach-title">{ja ? 'あなたの「行きたい」から、\n旅が始まる。' : 'Your curiosity\nsets the course.'}</h2>
+      <p>{ja ? '有名な景色を見に行く。知らない街で少し長く過ごす。茶畑を眺めながら、ひと息つく。旅の楽しみ方は、人それぞれです。' : 'A landmark you have dreamed of. A little longer in an unfamiliar town. Time for tea with a view. A good journey leaves space for what matters to you.'}</p>
+      <p>{ja ? 'まずは、好きなことや気になる場所をお聞かせください。決まったルートをなぞるだけでなく、移動と滞在のバランスから、一緒に旅を考えます。' : 'Start by sharing the places and experiences that draw you in. Together, we can think through the balance of travel, exploring and time to slow down.'}</p>
+      <a class="home-editorial-link" href={`${base}/about/`}>{ja ? '私たちの旅の考え方' : 'Get to know our approach'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+    </div>
+  </section>
+
+  <section class="home-services home-content-wrap" aria-labelledby="home-services-title">
+    <header class="home-section-heading">
+      <div>
+        <h2 id="home-services-title">{ja ? '旅の準備も、\nひとつずつ。' : 'The little details.\nThe whole journey.'}</h2>
+        <p>{ja ? 'ルートが決まったら、移動、宿泊、体験へ。必要なことを、ひとつの会話からご相談ください。' : 'Once a route starts taking shape, talk through the practical details that bring it together.'}</p>
+      </div>
+      <a class="home-editorial-link" href={`${base}/services/`}>{ja ? '旅のサービスを見る' : 'Explore travel services'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+    </header>
+    <div class="home-service-directory">
+      {services.map((service, i) => (
+        <a href={`${base}/services/#service-${serviceIds[i]}`} class="home-service-item">
+          <h3>{service.title}</h3><p>{service.text}</p>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-faq home-content-wrap" aria-labelledby="home-faq-title">
+    <div class="home-faq-intro">
+      <h2 id="home-faq-title">{ja ? '旅を決める前に。' : 'Before you set off.'}</h2>
+      <p>{ja ? 'まだ、すべて決まっていなくても大丈夫。まずはこちらから。' : 'You do not need every detail figured out. Here are a few useful places to start.'}</p>
+      <a class="home-editorial-link" href={`${base}/contact/`}>{ja ? 'ほかのことを相談する' : 'Ask another question'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+    </div>
+    <div class="home-faq-list">
+      {faqs.map(faq => (
+        <details>
+          <summary>{faq.question}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14" /></svg></summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-conversation" aria-labelledby="home-conversation-title">
+    <div class="home-conversation-inner">
+      <h2 id="home-conversation-title">{ja ? '次の旅の話を、\nここから。' : 'Every great journey\nbegins with a conversation.'}</h2>
+      <div class="home-conversation-action">
+        <p>{ja ? '日程、人数、気になる場所。まずは、そのひとつからお聞かせください。' : 'Your dates, your travel companions, a place on your wish list. Tell us what you have in mind.'}</p>
+        <WhatsAppLink lang={lang} label={ja ? 'WhatsAppで旅を相談' : 'Plan your trip on WhatsApp'} />
+        <span>{ja ? 'フォーム不要。WhatsAppから気軽に。' : 'A simple chat. No enquiry form.'}</span>
+      </div>
+    </div>
+  </section>
+</div>

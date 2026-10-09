@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
+import { pagePath, type Language } from '../data/site';
+import '../styles/journeys.css';
+
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const ja = lang === 'ja';
+const principles = ja ? [
+  { title: '立ち止まる時間も、旅のうち。', body: '海を眺めるひと休み、気になった街角への寄り道。行き先を詰め込む前に、どんな一日を過ごしたいかを大切に考えます。' },
+  { title: '景色の向こうの、暮らしへ。', body: 'よく知られた名所も、ふだんの市場も。歴史や食、人々の営みにふれることが、その場所を思い出深くしてくれます。' },
+  { title: '出発前に、すっきりと。', body: '移動の流れ、宿泊先、ご希望のサポート。料金や含まれる内容まで、気になることを相談しながら旅を具体的にしましょう。' },
+] : [
+  { title: 'Room to stop and stay a while.', body: 'A pause by the ocean. A turn into an interesting street. Before filling an itinerary, we start with how you would like each day to feel.' },
+  { title: 'A little closer to everyday life.', body: 'Famous landmarks have their place, and so do ordinary markets and a new taste at lunch. History, food and daily life give a landscape its meaning.' },
+  { title: 'Clear plans before you set off.', body: 'The roads between places, where to stay, and the help you need. Talk through the details, costs and inclusions as your journey takes shape.' },
+];
+const planning = ja ? [
+  { title: '気になることを聞かせてください', body: '旅行の時期、人数、行ってみたい場所。まだ決まっていないことがあっても大丈夫です。' },
+  { title: 'あなたのペースで、道をつなぐ', body: '海辺でゆっくりする日、高原へ向かう日。移動時間や休憩を考えながら、旅程を相談します。' },
+  { title: '旅の詳細を、一緒に確認', body: '日程、空き状況、料金、予約条件を確認してから、プランを決めましょう。' },
+] : [
+  { title: 'Tell us what draws you here', body: 'Share your dates, who is travelling and a few places you are curious about. It is fine to leave some questions open.' },
+  { title: 'Find a rhythm for the route', body: 'Time by the sea, a day in the hills, room for a break. Discuss the journey with travel time and your pace in mind.' },
+  { title: 'Agree on the details', body: 'Confirm the itinerary, availability, quote and booking terms before you make the plan final.' },
+];
+---
+<BaseLayout lang={lang} page="about">
+  <main id="main" class="travel-page about-page">
+    <section class="about-opening travel-wrap">
+      <div class="about-opening-copy">
+        <h1 class="travel-display">{ja ? '小さな島に、\nあなただけの旅を。' : 'A small island.\nA journey all\nyour own.'}</h1>
+        <p class="travel-lead">{ja ? '旅づくりの出発点は、あなたの好奇心。スリランカの海、緑、歴史をつなぎながら、心に残る時間を一緒に考えます。' : 'Our approach to Sri Lanka begins with your curiosity. Between the coast, the green hills and the old cities, there is room to shape a journey that feels like you.'}</p>
+        <a class="text-link" href="#our-approach">{ja ? '私たちが大切にすること' : 'Discover our approach'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" /></svg></a>
+      </div>
+      <figure class="about-opening-photo">
+        <img src="/images/journey-road.webp" width="1536" height="1024" alt={ja ? '朝の光に包まれた茶畑と山道。スリランカの高原を描いた旅のイメージ。' : 'A road winding through tea hills at sunrise, an illustrative Sri Lankan travel scene.'} fetchpriority="high" />
+        <figcaption><span>{ja ? '道の先に、まだ知らないスリランカ。' : 'There is always another view ahead.'}</span><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><path d="m27 15-3 9-9 3 3-9Z"/></svg></figcaption>
+      </figure>
+    </section>
+
+    <section class="about-principles travel-wrap" id="our-approach" aria-labelledby="approach-heading">
+      <div class="about-section-heading"><h2 id="approach-heading">{ja ? '心に残るのは、\n小さなひととき。' : 'It’s the little things\nthat stay with you.'}</h2><p>{ja ? 'どこへ行くかと同じくらい、どう過ごすかを大切に。' : 'How you spend the day matters as much as where you go.'}</p></div>
+      <div class="about-principle-list">{principles.map(principle => <article><h3>{principle.title}</h3><p>{principle.body}</p></article>)}</div>
+    </section>
+
+    <section class="about-planning travel-wrap" aria-labelledby="about-planning-heading">
+      <figure class="about-atlas"><img src="/images/highlands-scene.webp" width="1396" height="1127" alt={ja ? '青い列車と緑の高原を描いた、地図のようなスリランカの風景イラスト。' : 'An atlas-inspired illustration of Sri Lanka’s green highlands and a blue train.'} loading="lazy" /><figcaption>{ja ? '「行ってみたい」を、一本の道に。' : 'Turn your wish list into a way through the island.'}</figcaption></figure>
+      <div class="about-planning-copy"><h2 id="about-planning-heading">{ja ? '旅は、話すことから。' : 'First, a conversation.\nThen, a journey.'}</h2><ol>{planning.map((step, i) => <li><span class="about-step-number" aria-hidden="true">{i + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol><a class="text-link" href={pagePath(lang, 'services')}>{ja ? '旅のサポートを見る' : 'Explore travel services'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a></div>
+    </section>
+
+    <section class="travel-invitation travel-wrap"><div><h2>{ja ? 'あなたの旅の話を、\n聞かせてください。' : 'Your Sri Lanka story\ncan start here.'}</h2><p>{ja ? '旅程のアイデアを見つけるのも、ひとこと相談するのも。気になるところから始めましょう。' : 'Browse a few journey ideas, or send a simple hello. Begin wherever your curiosity takes you.'}</p><a class="text-link" href={pagePath(lang, 'packages')}>{ja ? '旅のパッケージを見る' : 'Explore the journeys'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a></div><WhatsAppLink lang={lang} label={ja ? 'WhatsAppで旅を相談する' : 'Let’s talk about your trip'} /></section>
+  </main>
+</BaseLayout>
+
+<style>
+  .about-opening { display: grid; grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); align-items: center; gap: 6%; padding-block: clamp(2.5rem, 6vw, 6rem); }
+  .about-opening-copy { padding-bottom: 1.5rem; }
+  .about-opening .travel-display { font-size: clamp(2.9rem, 5vw, 4.8rem); }
+  :lang(ja) .about-opening .travel-display { font-size: clamp(2.2rem, 4vw, 3.9rem); line-height: 1.5; }
+  .about-opening .travel-lead { margin-top: 1.7rem; }
+  .about-opening .text-link { margin-top: 1.8rem; }
+  .about-page .text-link { display: inline-flex; align-items: center; gap: 1rem; max-width: 100%; font-size: .82rem; line-height: 1.7; }
+  .about-page .text-link svg { flex: 0 0 20px; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .about-opening-photo > img { width: 100%; height: auto; aspect-ratio: .98; object-fit: cover; object-position: 37% center; animation: about-road-opens 1s cubic-bezier(.16,1,.3,1); }
+  .about-opening-photo figcaption { display: flex; align-items: center; justify-content: space-between; gap: 1.4rem; margin-top: 1rem; color: var(--green); font-family: 'Sofia', var(--serif-jp); font-size: 1.2rem; line-height: 1.6; }
+  .about-opening-photo figcaption svg { flex: 0 0 42px; width: 42px; height: 42px; fill: none; stroke: var(--vermilion-cta); stroke-width: 1.3; }
+  .about-principles { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 6%; padding-block: clamp(2.8rem, 6vw, 6rem); border-top: 1px solid var(--line); scroll-margin-top: 2rem; }
+  .about-page h2 { font-size: clamp(1.9rem, 3.3vw, 3rem); line-height: 1.4; letter-spacing: -.03em; white-space: pre-line; }
+  .about-section-heading > p { max-width: 31ch; margin-top: 1.5rem; color: var(--green); font-family: 'Sofia', var(--serif-jp); font-size: 1.2rem; line-height: 1.8; }
+  .about-principle-list article { padding-block: 1.5rem 2rem; border-top: 1px solid var(--line); }
+  .about-principle-list article:first-child { padding-top: 0; border: 0; }
+  .about-principle-list article:last-child { padding-bottom: 0; }
+  .about-principle-list h3 { font-size: clamp(1.15rem, 1.65vw, 1.45rem); line-height: 1.55; }
+  .about-principle-list p { margin-top: .8rem; color: #40575f; font-size: .9rem; line-height: 1.95; }
+  .about-planning { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 7%; padding-block: clamp(2.5rem, 5vw, 5rem) clamp(3.5rem, 7vw, 7rem); }
+  .about-atlas img { width: 100%; height: auto; }
+  .about-atlas figcaption { margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid var(--line); color: var(--green); font-family: 'Sofia', var(--serif-jp); font-size: 1.1rem; line-height: 1.7; }
+  .about-planning-copy ol { margin: 2rem 0 0; padding: 0; list-style: none; }
+  .about-planning-copy li { position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 1rem; padding-bottom: 1.9rem; }
+  .about-planning-copy li:not(:last-child)::before { content: ''; position: absolute; top: 1.75rem; bottom: .45rem; left: 11px; width: 1px; background: var(--line); }
+  .about-step-number { color: var(--vermilion-cta); font-family: var(--serif-jp); font-size: 1.15rem; line-height: 1.5; text-align: center; font-variant-numeric: tabular-nums; }
+  .about-planning-copy h3 { font-size: 1.07rem; line-height: 1.6; }
+  .about-planning-copy li p { margin-top: .65rem; color: #40575f; font-size: .86rem; line-height: 1.9; }
+  .about-planning-copy .text-link { margin-top: 0; }
+  .about-page .travel-invitation .text-link { margin-top: 1.3rem; }
+  @keyframes about-road-opens { from { clip-path: inset(2% 2% 2% 2%); } to { clip-path: inset(0); } }
+  @media (max-width: 950px) {
+    .about-opening { gap: 5%; }
+    .about-opening .travel-display { font-size: clamp(2.8rem, 4.8vw, 4rem); }
+    .about-opening-photo > img { aspect-ratio: .77; }
+    .about-principles { gap: 5%; }
+    .about-planning { gap: 5%; align-items: start; }
+  }
+  @media (max-width: 650px) {
+    .about-opening, .about-principles, .about-planning { grid-template-columns: minmax(0, 1fr); }
+    .about-opening { gap: 1.9rem; padding-block: 2.5rem 3rem; }
+    .about-opening-copy { padding: 0; }
+    .about-opening .travel-display { font-size: clamp(2.6rem, 9.7vw, 3.65rem); }
+    :lang(ja) .about-opening .travel-display { font-size: clamp(2rem, 7.8vw, 2.8rem); }
+    .about-opening .travel-lead { margin-top: 1.25rem; }
+    .about-opening .text-link { margin-top: 1.2rem; }
+    .about-opening-photo > img { aspect-ratio: 1.1; object-position: 37% 65%; }
+    .about-opening-photo figcaption { gap: .75rem; margin-top: .75rem; font-size: 1.07rem; }
+    .about-opening-photo figcaption svg { flex-basis: 34px; width: 34px; height: 34px; }
+    .about-principles { gap: 2.4rem; padding-block: 2.8rem; }
+    .about-page h2 { font-size: clamp(1.8rem, 7.4vw, 2.4rem); }
+    .about-section-heading > p { max-width: 32ch; margin-top: 1rem; font-size: 1.08rem; }
+    .about-principle-list article { padding-block: 1.4rem 1.6rem; }
+    .about-principle-list h3 { font-size: 1.18rem; }
+    .about-planning { gap: 2.4rem; padding-block: 1rem 3.5rem; }
+    .about-atlas img { max-height: 390px; object-fit: contain; }
+    .about-atlas figcaption { margin-top: .7rem; padding-top: .9rem; font-size: 1.02rem; }
+    .about-planning-copy ol { margin-top: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .about-opening-photo > img { animation: none; } }
+</style>

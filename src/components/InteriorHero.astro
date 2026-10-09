@@ -1,0 +1,13 @@
+---
+import { copy, type Language, type PageKey } from '../data/site';
+const { lang = 'ja', page } = Astro.props as { lang?: Language; page: Exclude<PageKey, 'home'> };
+const t = copy[lang].pages[page];
+---
+<section class="interior-hero">
+  <img class="interior-map" src="/images/island-locator.webp" alt="" aria-hidden="true" />
+  <div class="interior-copy" data-reveal>
+    <h1>{t.title}</h1>
+    <p class="interior-subtitle">{t.subtitle}</p>
+  </div>
+  <div class="interior-coordinates" aria-hidden="true">7° 52′ N&nbsp; 80° 46′ E</div>
+</section>

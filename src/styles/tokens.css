@@ -1,0 +1,11 @@
+:root {
+  --paper: #f5f3ec;
+  --ink: #172d3b;
+  --green: #3e7566;
+  --vermilion: #d24c36;
+  --vermilion-cta: #b83f2e;
+  --line: rgba(23, 45, 59, .22);
+  --serif-jp: 'Noto Serif JP', serif;
+  --sans-jp: 'Noto Sans JP', sans-serif;
+  --display-latin: 'Playfair Display', serif;
+}

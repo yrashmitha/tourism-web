@@ -1,0 +1,159 @@
+/* The Route Story atlas, opened into an itinerary and a travel notebook. */
+.travel-page { --travel-gutter: clamp(1.25rem, 6vw, 6rem); }
+.travel-wrap { width: min(100%, 1440px); margin-inline: auto; padding-inline: var(--travel-gutter); }
+.travel-page :where(figure, h1, h2, h3, p) { margin: 0; }
+.travel-page :where(div, section, article, figure, nav, details) { min-width: 0; }
+.travel-page h1, .travel-page h2, .travel-page h3 { font-family: var(--serif-jp); font-weight: 400; text-wrap: balance; }
+.travel-display { font-size: clamp(2.8rem, 4.9vw, 5rem); line-height: 1.16; letter-spacing: -.04em; white-space: pre-line; }
+:lang(ja) .travel-display { font-size: clamp(2.1rem, 4.2vw, 4.15rem); line-height: 1.4; }
+.travel-lead { max-width: 47ch; color: #40575f; font-size: clamp(.94rem, 1.15vw, 1.08rem); line-height: 1.9; }
+.travel-page .button { max-width: 100%; min-height: 48px; }
+.journey-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 4%; padding-top: clamp(2.5rem, 5vw, 5.5rem); padding-bottom: 3.5rem; }
+.journey-hero-copy .travel-lead { margin-top: 1.7rem; }
+.journey-hero-copy .text-link { margin-top: 1.8rem; }
+.journey-hero-art { position: relative; }
+.journey-hero-art img { width: 100%; aspect-ratio: 1.2; height: auto; object-fit: cover; }
+.journey-hero-art figcaption { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .65rem; padding-top: .75rem; border-top: 1px solid var(--line); font-family: 'Sofia', var(--serif-jp); font-size: 1.1rem; }
+.journey-hero-art figcaption > span:last-child { color: var(--vermilion-cta); font-family: var(--sans-jp); font-size: 1.7rem; }
+.journey-menu { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 1.25rem; scroll-margin-top: 1rem; }
+.journey-menu > a { display: flex; flex-direction: column; gap: .55rem; padding: 1.5rem 1.4rem; border-block: 1px solid var(--line); border-right: 1px solid var(--line); text-decoration: none; transition: background .2s, color .2s; }
+.journey-menu > a:first-child { border-left: 1px solid var(--line); }
+.journey-menu > a:hover, .journey-menu > a:focus-visible { background: var(--green); color: var(--paper); }
+.journey-menu-duration { display: flex; align-items: baseline; gap: .45em; font-family: var(--serif-jp); font-size: 2.1rem; line-height: 1; }
+.journey-menu-duration small { font-family: var(--sans-jp); font-size: .8rem; }
+.journey-menu a > span:last-child { display: flex; align-items: center; justify-content: space-between; gap: .5rem; font-size: .77rem; }
+.journey-menu a > span:last-child > span { font-size: 1.3rem; }
+.journey-collection-note { max-width: 75ch; padding-block: .9rem 2.7rem; color: #526568; font-size: .78rem; line-height: 1.8; }
+.journey-entry { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; padding-block: clamp(2.5rem, 5vw, 5rem); border-top: 1px solid var(--line); scroll-margin-top: 1.5rem; }
+.journey-entry:nth-of-type(even) .journey-photo { order: 2; }
+.journey-photo { position: relative; }
+.journey-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.journey-photo--wildlife img { aspect-ratio: .94; object-position: 60% center; }
+.journey-duration { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: .9rem; min-width: 132px; padding: .85rem 1.1rem .85rem .3rem; background: var(--paper); }
+.journey-duration strong { color: var(--vermilion-cta); font-family: var(--serif-jp); font-size: 3.2rem; font-weight: 400; line-height: 1; }
+.journey-duration > span { font-size: .66rem; line-height: 1.6; letter-spacing: .05em; }
+.journey-duration small { display: block; color: #526568; font-size: .72rem; letter-spacing: 0; }
+.journey-photo figcaption { padding-block: 1rem; border-bottom: 1px solid var(--line); color: var(--green); font-family: 'Sofia', var(--serif-jp); font-size: 1.03rem; line-height: 1.6; }
+.journey-copy h2 { font-size: clamp(1.75rem, 2.8vw, 2.65rem); line-height: 1.3; letter-spacing: -.03em; }
+.journey-route { display: flex; align-items: start; gap: .65rem; margin-top: 1rem !important; color: var(--green); font-size: .71rem; line-height: 1.85; }
+.journey-route svg { flex: 0 0 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.journey-summary { margin-top: 1.35rem !important; color: #40575f; font-size: .92rem; line-height: 1.95; }
+.journey-highlights { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin: 1.3rem 0; padding: 0; list-style: none; font-size: .74rem; line-height: 1.7; }
+.journey-highlights li { display: flex; align-items: baseline; gap: .45rem; }
+.journey-highlights li::before { content: ''; flex: 0 0 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+.journey-itinerary { margin-block: 1.4rem 1.6rem; border-block: 1px solid var(--line); }
+.journey-itinerary summary, .service-detail summary { display: flex; align-items: center; gap: 1rem; cursor: pointer; list-style: none; }
+.journey-itinerary summary::-webkit-details-marker, .service-detail summary::-webkit-details-marker { display: none; }
+.journey-itinerary summary { justify-content: space-between; min-height: 58px; padding-block: .85rem; font-size: .83rem; }
+.disclosure-mark { position: relative; flex: 0 0 20px; width: 20px; height: 20px; color: var(--vermilion-cta); }
+.disclosure-mark::before, .disclosure-mark::after { content: ''; position: absolute; left: 3px; top: 9px; width: 14px; height: 1px; background: currentColor; transition: transform .25s; }
+.disclosure-mark::after { transform: rotate(90deg); }
+details[open] > summary .disclosure-mark::after { transform: rotate(0); }
+.journey-itinerary ol { margin: 0 0 1.4rem; padding: 0; list-style: none; }
+.journey-itinerary li { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 1rem; padding: 1rem 0 1rem 1.1rem; border-left: 1px solid var(--line); }
+.journey-itinerary li::before { content: ''; position: absolute; top: 1.4rem; left: -4px; width: 7px; height: 7px; border: 1px solid var(--vermilion); border-radius: 50%; background: var(--paper); }
+.itinerary-day { padding-top: .12rem; color: var(--vermilion-cta); font-size: .69rem; white-space: nowrap; }
+.journey-itinerary h3 { font-size: .9rem; font-weight: 500; line-height: 1.55; }
+.journey-itinerary li p { margin-top: .45rem; color: #40575f; font-size: .8rem; line-height: 1.8; }
+.travel-invitation { display: flex; align-items: center; justify-content: space-between; gap: 3rem; padding-block: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
+.travel-invitation h2, .service-ledger h2, .planning-path h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.3; letter-spacing: -.03em; white-space: pre-line; }
+.travel-invitation p { max-width: 50ch; margin-top: 1rem; color: #40575f; font-size: .9rem; line-height: 1.9; }
+.travel-invitation .button { flex-shrink: 0; }
+
+/* Services follows a road: the view, the practical details, then the next step. */
+.services-hero { padding-top: clamp(2.5rem, 5.5vw, 5.5rem); }
+.services-hero-heading { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); align-items: end; gap: 6%; margin-bottom: 3rem; }
+.services-hero-heading .travel-display { font-size: clamp(2.5rem, 4.35vw, 4.5rem); }
+:lang(ja) .services-hero-heading .travel-display { font-size: clamp(2rem, 3.6vw, 3.55rem); }
+.services-hero-heading .button { margin-top: 1.4rem; }
+.services-panorama { position: relative; }
+.services-panorama > img { width: 100%; height: clamp(320px, 33vw, 490px); object-fit: cover; object-position: center 58%; animation: road-arrives .9s cubic-bezier(.16,1,.3,1); }
+@keyframes road-arrives { from { clip-path: inset(4% 4% 4% 4%); } to { clip-path: inset(0); } }
+.services-panorama figcaption { position: absolute; bottom: -1px; left: -1px; display: flex; align-items: center; gap: 1.5rem; max-width: 82%; padding: 1.15rem 1.5rem 1.15rem .1rem; background: var(--paper); font-family: 'Sofia', var(--serif-jp); font-size: clamp(1rem, 1.6vw, 1.4rem); line-height: 1.5; }
+.services-panorama figcaption svg { flex: 0 0 68px; width: 68px; height: 32px; fill: none; stroke: var(--vermilion); stroke-width: 1.6; }
+.services-route { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem 1.7rem; padding-top: 2.3rem; }
+.services-route a { position: relative; display: flex; align-items: center; gap: .8rem; min-height: 48px; padding-top: .8rem; border-top: 1px solid var(--line); font-size: .81rem; text-decoration: none; }
+.services-route a > span:last-child { margin-left: auto; }
+.service-stop { position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border: 2px solid var(--vermilion); border-radius: 50%; background: var(--paper); transition: transform .2s, background .2s; }
+.services-route a:hover { color: var(--vermilion-cta); }
+.services-route a:hover .service-stop { transform: scale(1.35); background: var(--vermilion); }
+.service-ledger { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr); gap: 2rem 10%; padding-block: clamp(4rem, 8vw, 8rem); }
+.service-ledger-intro > p { max-width: 38ch; margin-top: 1.2rem; color: #40575f; font-size: .9rem; line-height: 1.9; }
+.service-ledger-intro > img { width: 145px; height: 218px; margin-top: 1.6rem; object-fit: cover; mix-blend-mode: multiply; }
+.service-ledger-intro .text-link { font-size: .81rem; }
+.service-detail { scroll-margin-top: 1.5rem; border-top: 1px solid var(--line); }
+.service-detail:last-child { border-bottom: 1px solid var(--line); }
+.service-detail summary { padding-block: 1.6rem; }
+.service-detail h3 { flex: 1; font-size: clamp(1.1rem, 1.8vw, 1.55rem); line-height: 1.45; }
+.service-detail[open] summary h3 { color: var(--green); }
+.service-symbol { flex: 0 0 32px; width: 32px; height: 32px; margin-right: .4rem; fill: none; stroke: var(--green); stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.service-detail-body { padding: 0 0 1.7rem 3.7rem; }
+.service-detail-body > p { color: #40575f; font-size: .91rem; line-height: 1.95; }
+.service-detail-body ul { display: grid; gap: .5rem; margin: 1.2rem 0 0; padding-left: 1rem; color: var(--green); font-size: .77rem; line-height: 1.75; }
+.service-detail-body .text-link { font-size: .8rem; }
+.service-availability { grid-column: 2; color: #526568; font-size: .76rem; line-height: 1.8; }
+.planning-path { padding-block: clamp(3rem, 6vw, 6rem); background: var(--ink); color: var(--paper); }
+.planning-path-heading { display: flex; align-items: end; justify-content: space-between; gap: 3rem; }
+.planning-path-heading > p { max-width: 25ch; padding-bottom: .5rem; color: #c4d4ce; font-family: 'Sofia', var(--serif-jp); font-size: 1.25rem; line-height: 1.65; }
+.planning-path ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; margin: 3rem 0 0; padding: 0; list-style: none; counter-reset: none; }
+.planning-path li { position: relative; padding-top: 1.5rem; border-top: 1px solid #6b827f; }
+.planning-path li::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border: 2px solid #e98369; border-radius: 50%; background: var(--ink); }
+.planning-step { color: #e98369; font-family: var(--serif-jp); font-size: 1.1rem; }
+.planning-path h3 { margin-top: .75rem; font-size: 1.2rem; line-height: 1.5; }
+.planning-path li p { margin-top: .8rem; color: #c4d4ce; font-size: .86rem; line-height: 1.9; }
+@media (max-width: 950px) {
+  .travel-page { --travel-gutter: 5vw; }
+  .services-hero-heading { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 5%; }
+  .services-hero-heading .travel-display { font-size: 3rem; }
+  .service-ledger { gap: 2rem 6%; }
+  .journey-entry { gap: 2rem; }
+  .planning-path ol { gap: 1.8rem; }
+  .travel-invitation { align-items: start; flex-direction: column; gap: 1.6rem; }
+}
+@media (max-width: 650px) {
+  .travel-page { --travel-gutter: max(1.2rem, 5vw); }
+  .journey-hero { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; padding-block: 2.6rem 1rem; }
+  .travel-display { font-size: clamp(2.4rem, 9.5vw, 3.5rem); }
+  .journey-hero-copy .travel-lead { margin-top: 1.1rem; }
+  .journey-hero-copy .text-link { margin-top: 1.15rem; }
+  .journey-hero-art img { max-height: 310px; aspect-ratio: 1.3; }
+  .journey-hero-art figcaption { font-size: 1rem; }
+  .journey-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 1.8rem; }
+  .journey-menu > a { padding: 1.15rem; }
+  .journey-menu > a:nth-child(n+3) { border-top: 0; }
+  .journey-menu > a:nth-child(3) { border-left: 1px solid var(--line); }
+  .journey-menu-duration { font-size: 1.85rem; }
+  .journey-collection-note { padding-bottom: 1.8rem; }
+  .journey-entry { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-block: 2rem 2.8rem; }
+  .journey-entry:nth-of-type(even) .journey-photo { order: 0; }
+  .journey-photo img, .journey-photo--wildlife img { aspect-ratio: 1.13; max-height: 390px; }
+  .journey-duration { padding-block: .7rem; }
+  .journey-duration strong { font-size: 2.7rem; }
+  .journey-copy h2 { font-size: 1.9rem; }
+  .journey-summary { font-size: .9rem; }
+  .journey-itinerary li { grid-template-columns: 43px minmax(0, 1fr); gap: .6rem; }
+  .journey-copy > .button { width: 100%; }
+  .services-hero { padding-top: 2.5rem; }
+  .services-hero-heading { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; margin-bottom: 2rem; }
+  .services-hero-heading .travel-display { font-size: clamp(2.35rem, 8.6vw, 3.4rem); }
+  :lang(ja) .services-hero-heading .travel-display { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .services-panorama > img { height: 340px; object-position: 42% center; }
+  .services-panorama figcaption { gap: .6rem; padding: .85rem .9rem .85rem 0; max-width: 90%; font-size: 1rem; }
+  .services-panorama figcaption svg { flex-basis: 40px; width: 40px; }
+  .services-route { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 1.5rem; padding-top: 1.8rem; }
+  .service-ledger { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-block: 3.5rem; }
+  .service-ledger-intro { position: relative; padding-right: 0; }
+  .service-ledger-intro > img { display: none; }
+  .service-ledger-intro .text-link { margin-top: .9rem; }
+  .service-detail summary { gap: .75rem; padding-block: 1.25rem; }
+  .service-symbol { flex-basis: 27px; width: 27px; margin: 0; }
+  .service-detail h3 { font-size: 1.18rem; }
+  .service-detail-body { padding-left: 0; }
+  .service-availability { grid-column: 1; }
+  .planning-path-heading { flex-direction: column; align-items: start; gap: 1.2rem; }
+  .planning-path-heading > p { max-width: 100%; font-size: 1.1rem; }
+  .planning-path ol { grid-template-columns: minmax(0, 1fr); gap: 2rem; margin-top: 2rem; }
+  .planning-path h3 { font-size: 1.25rem; }
+  .travel-invitation h2, .service-ledger h2, .planning-path h2 { font-size: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) { .services-panorama > img { animation: none; } }

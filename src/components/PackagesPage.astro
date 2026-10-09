@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
+import { journeys } from '../data/journeys';
+import { type Language } from '../data/site';
+import '../styles/journeys.css';
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const ja = lang === 'ja';
+const themes = { wildlife: { ja: '野生動物', en: 'Wildlife' }, culture: { ja: '文化と歴史', en: 'Culture' }, highlands: { ja: '茶畑と高原', en: 'Tea country' }, coast: { ja: '島をめぐる', en: 'Island circuit' } };
+---
+<BaseLayout lang={lang} page="packages">
+  <main id="main" class="travel-page">
+    <section class="journey-hero travel-wrap">
+      <div class="journey-hero-copy">
+        <h1 class="travel-display">{ja ? '旅の日数から、\n島の物語を。' : 'A little time.\nA different world.'}</h1>
+        <p class="travel-lead">{ja ? 'サファリの一日、文化にふれる週末、海と高原をつなぐ旅。あなたの時間に合うルートを見つけてください。' : 'A day in the wild. A cultural escape. A week between coast and tea country. Find the journey that fits your time.'}</p>
+        <a class="text-link" href="#journey-menu">{ja ? '日数から旅を選ぶ' : 'Find your kind of journey'} <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="journey-hero-art">
+        <img src="/images/highlands-scene.webp" width="1498" height="1208" alt={ja ? '茶畑の丘と橋を渡る列車を描いた旅のイメージ' : 'An illustrated journey through tea country and a railway viaduct'} fetchpriority="high" />
+        <figcaption><span>{ja ? '次の旅は、どこへ？' : 'Where will your story go?'}</span><span aria-hidden="true">↗</span></figcaption>
+      </figure>
+    </section>
+
+    <nav class="journey-menu travel-wrap" id="journey-menu" aria-label={ja ? '日数から旅を選ぶ' : 'Choose a journey by duration'}>
+      {journeys.map(journey => <a href={`#${journey.id}`}>
+        <span class="journey-menu-duration">{journey.days}<small>{ja ? '日間' : journey.days === 1 ? 'day' : 'days'}</small></span>
+        <span>{themes[journey.theme][lang]} <span aria-hidden="true">↗</span></span>
+      </a>)}
+    </nav>
+
+    <section class="journey-collection travel-wrap" aria-label={ja ? '旅のパッケージ' : 'Tour packages'}>
+      <p class="journey-collection-note">{ja ? '下記は旅程の一例です。出発地や日程に合わせて、訪問先・料金・含まれる内容をご相談ください。' : 'Suggested itineraries to make your own. Confirm the route, quote and inclusions around your dates and starting point.'}</p>
+      {journeys.map((journey) => <article class="journey-entry" id={journey.id}>
+        <figure class={`journey-photo journey-photo--${journey.theme}`}>
+          <img src={journey.image} alt={journey.title[lang]} loading="lazy" />
+          <div class="journey-duration"><strong>{journey.days}</strong><span>{ja ? '日間の旅' : journey.days === 1 ? 'DAY JOURNEY' : 'DAY JOURNEY'}<small>{journey.nights === 0 ? (ja ? '日帰り' : 'Day trip') : (ja ? `${journey.nights}泊` : `${journey.nights} ${journey.nights === 1 ? 'night' : 'nights'}`)}</small></span></div>
+          <figcaption>{journey.fit[lang]}</figcaption>
+        </figure>
+        <div class="journey-copy">
+          <h2>{journey.title[lang]}</h2>
+          <p class="journey-route"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v5a4 4 0 0 0 4 4h5"/></svg>{journey.route[lang]}</p>
+          <p class="journey-summary">{journey.summary[lang]}</p>
+          <ul class="journey-highlights">{journey.highlights.map(highlight => <li>{highlight[lang]}</li>)}</ul>
+          <details class="journey-itinerary">
+            <summary><span>{ja ? '一日ごとの旅程を見る' : 'Explore the daily itinerary'}</span><span class="disclosure-mark" aria-hidden="true"></span></summary>
+            <ol>{journey.itinerary.map((day, index) => <li><span class="itinerary-day">{ja ? `${index + 1}日目` : `Day ${index + 1}`}</span><div><h3>{day.title[lang]}</h3><p>{day.description[lang]}</p></div></li>)}</ol>
+          </details>
+          <WhatsAppLink lang={lang} label={ja ? 'この旅を相談する' : 'Enquire about this journey'} message={ja ? `「${journey.title.ja}（${journey.days}日間）」について相談したいです。日程や料金を教えてください。` : `Hello, I’m interested in the ${journey.days}-day ${journey.title.en} journey. Could we discuss dates, itinerary and a quote?`} />
+        </div>
+      </article>)}
+    </section>
+    <section class="travel-invitation travel-wrap">
+      <div><h2>{ja ? '気になる場所を、\nひとつの旅に。' : 'Your wish list.\nYour own route.'}</h2><p>{ja ? 'もっと長く、もっとゆっくり。気になる旅を出発点に、日数や行き先を相談してみませんか。' : 'Stay longer, slow down, or bring a different destination into the story. Use these journeys as a starting point.'}</p></div>
+      <WhatsAppLink lang={lang} label={ja ? 'オリジナルの旅を相談' : 'Plan a personal itinerary'} />
+    </section>
+  </main>
+</BaseLayout>

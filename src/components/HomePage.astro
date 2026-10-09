@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AtlasRail from './AtlasRail.astro';
+import HomeSections from './HomeSections.astro';
+import { type Language } from '../data/site';
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+---
+<BaseLayout lang={lang} page="home">
+  <main id="main">
+    <AtlasRail lang={lang} />
+    <HomeSections lang={lang} />
+  </main>
+</BaseLayout>

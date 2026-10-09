@@ -1,0 +1,83 @@
+---
+import { copy, pagePath, site, type Language, type PageKey, whatsappUrl } from '../data/site';
+import '../styles/global.css';
+const { lang = 'ja', page = 'home', title } = Astro.props as { lang?: Language; page?: PageKey; title?: string };
+const t = copy[lang];
+const titleText = title ?? `${page === 'home' ? site.name : t.pages[page].label} | Sri Lanka`;
+const switchLanguage = lang === 'ja' ? 'en' : 'ja';
+const switchText = lang === 'ja' ? 'EN' : '日本語';
+const whatsapp = whatsappUrl(lang);
+---
+<!doctype html>
+<html lang={lang === 'ja' ? 'ja' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="description" content={t.intro.replace('\n', ' ')} />
+    <meta property="og:title" content={titleText} />
+    <meta property="og:description" content={t.intro.replace('\n', ' ')} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{titleText}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600&family=Sofia&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{lang === 'ja' ? '本文へ移動' : 'Skip to content'}</a>
+    <header class="site-header">
+      <a class="brand" href={pagePath(lang, 'home')} aria-label={site.name}>
+        <span>{site.name}</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label={lang === 'ja' ? 'メニューを開く' : 'Open menu'}>
+        <span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primary-nav" aria-label={lang === 'ja' ? 'メインナビゲーション' : 'Main navigation'}>
+        {(['home', 'packages', 'services', 'about', 'contact'] as PageKey[]).map((key, i) => (
+          <a class:list={['nav-link', page === key && 'is-active']} href={pagePath(lang, key)} aria-current={page === key ? 'page' : undefined}>
+            <span>{t.nav[i]}</span><small>{t.navEn[i]}</small>
+          </a>
+        ))}
+      </nav>
+      <div class="header-actions">
+        <a class="language-switch" href={pagePath(switchLanguage, page)} lang={switchLanguage}>{switchText}</a>
+        <a class="button button-red header-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">
+          <svg class="whatsapp-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.1 8.1 0 0 1-8.2 8.1 8.5 8.5 0 0 1-3.8-.9l-4.1 1.1 1.1-4a8.3 8.3 0 1 1 15-4.3Z"/><path d="M8.5 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.3.6.8 1.1 1.4 1.5.3.2 1 .6 1.6.8.2.1.4 0 .6-.2l.7-.8c.2-.2.4-.3.7-.2l1.6.8c.3.1.4.3.4.5 0 .3-.2 1.2-.8 1.7-.6.6-1.3.7-1.8.7-.6 0-1.5-.2-2.8-.8-1.7-.8-3-2.3-3.4-2.8-.4-.5-1.1-1.5-1.1-2.7 0-1.1.6-1.8.8-2.1Z"/></svg>{t.whatsapp}<span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <a class="brand footer-brand" href={pagePath(lang, 'home')}>{site.name}</a>
+      <p>{t.footer}</p>
+      <div class="footer-links">{(['packages', 'services', 'about', 'contact'] as PageKey[]).map((key) => <a href={pagePath(lang, key)}>{t.pages[key].label}</a>)}</div>
+      <span class="copyright">© {new Date().getFullYear()} · Sri Lanka</span>
+    </footer>
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const navigation = document.querySelector('.primary-nav');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!open));
+        navigation?.classList.toggle('is-open', !open);
+      });
+      document.querySelectorAll('[data-reveal]').forEach((element, index) => {
+        element.style.setProperty('--reveal-delay', `${Math.min(index * 70, 350)}ms`);
+      });
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+        }), { threshold: 0.12 });
+      document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+        const routeMotion = document.querySelector('[data-route-motion]');
+        if (routeMotion) {
+          const routeObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+            routeMotion.classList.toggle('route-motion-active', entry.isIntersecting);
+          }), { threshold: 0.1 });
+          routeObserver.observe(routeMotion);
+        }
+      } else document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-visible'));
+    </script>
+  </body>
+</html>
