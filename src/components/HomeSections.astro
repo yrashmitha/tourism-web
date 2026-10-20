@@ -15,14 +15,14 @@ const duration = (days: number, nights: number) => ja
   : `${days} ${days === 1 ? 'day' : 'days'}${nights ? ` / ${nights} ${nights === 1 ? 'night' : 'nights'}` : ''}`;
 const services = ja ? [
   { title: '旅のプランづくり', text: '行きたい場所と過ごしたい時間から、無理のないルートを相談。' },
-  { title: '現地でのガイド', text: '街や文化の背景を知る旅へ。対応言語は事前にご確認ください。' },
+  { title: '日本人スタッフの同行', text: '街や文化の背景を知る旅へ。日本人スタッフが旅に同行し、ご案内します。' },
   { title: '移動の手配', text: '空港から旅先まで。人数や荷物に合わせた移動方法を相談。' },
   { title: '宿泊先の相談', text: '旅のペース、エリア、ご予算に合わせて宿泊先を検討。' },
   { title: 'チケットの相談', text: '訪問先や体験の予約について、手配方法と空き状況を確認。' },
   { title: '旅のサポート', text: '出発前の疑問から現地での予定まで、必要なサポートを相談。' },
 ] : [
   { title: 'Itinerary planning', text: 'Connect the places you love with a pace that suits your days.' },
-  { title: 'Local guiding', text: 'Explore the stories behind each stop. Confirm your preferred language before booking.' },
+  { title: 'Guiding with a Japanese team member', text: 'A Japanese member of the team will accompany you and guide you along the way.' },
   { title: 'Transport arrangements', text: 'Discuss airport transfers and travel between stops for your group and luggage.' },
   { title: 'Places to stay', text: 'Explore accommodation choices around your route, budget and travel style.' },
   { title: 'Tickets & experiences', text: 'Ask about reservations, availability and arrangements for your chosen visits.' },
@@ -32,12 +32,12 @@ const faqs = ja ? [
   { question: '旅の相談は、どのように始めますか？', answer: 'WhatsAppで、ご旅行の日程、人数、気になる場所をお送りください。まだ予定が決まっていなくても、希望する旅の雰囲気からご相談いただけます。' },
   { question: '料金や、旅に含まれるものは？', answer: '行程、人数、時期、宿泊先や移動方法により異なります。お申し込み前に、料金と含まれるもの・含まれないものを個別にご確認ください。掲載ルートは旅を考えるための提案です。' },
   { question: 'パッケージの行程を変更できますか？', answer: '掲載のルートを出発点に、行きたい場所や滞在時間をご相談ください。移動時間、空き状況、当日の条件などを踏まえて、実際の行程を確認します。' },
-  { question: '日本語でのガイドは可能ですか？', answer: 'サイトは日本語と英語でご覧いただけます。ガイドの対応言語は日程や手配内容によりますので、ご希望の言語を最初のメッセージに添えて、予約前にご確認ください。' },
+  { question: '日本人スタッフは旅に同行しますか？', answer: 'はい。日本人スタッフが旅に同行し、ご案内します。ご希望の日程での同行について、WhatsAppで事前にご相談ください。' },
 ] : [
   { question: 'How do I start planning?', answer: 'Send a WhatsApp message with your travel dates, group size and places you are curious about. If your plans are still open, start with the kind of trip you would enjoy.' },
   { question: 'What will my trip cost, and what is included?', answer: 'The price depends on your itinerary, group, dates, accommodation and transport. Confirm the quote, inclusions and exclusions before booking. The routes shown here are starting points for planning.' },
   { question: 'Can I change a package itinerary?', answer: 'Use any route as a starting point and discuss the places you want to add or the time you want to spend. Your final itinerary will take travel time, availability and local conditions into account.' },
-  { question: 'Can I request a Japanese-speaking guide?', answer: 'This website is available in Japanese and English. Guide language availability depends on your dates and arrangements. Include your preferred language in your first message and confirm it before booking.' },
+  { question: 'Will a Japanese team member accompany the trip?', answer: 'Yes. A Japanese member of the team will accompany and guide you. Ask about arrangements for your dates on WhatsApp.' },
 ];
 ---
 <div class="home-discovery">

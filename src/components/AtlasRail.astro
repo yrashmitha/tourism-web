@@ -46,6 +46,7 @@ const teasers = [
         <h1>{t.heroJa}</h1>
         <p class="atlas-english-title">{t.heroEn}</p>
         <p class="atlas-introduction">{t.intro}</p>
+        <p class="atlas-guide-note">{t.guideNote}</p>
         <div class="atlas-actions">
           <WhatsAppLink lang={lang} label={t.whatsapp} class="button button-red atlas-whatsapp" />
           <a class="button button-outline atlas-packages" href={packages}>{t.packagesLink}<span aria-hidden="true">→</span></a>
@@ -112,6 +113,20 @@ const teasers = [
     <div class="featured-peek-items">
       {teasers.map((item) => <a href={packages} class="featured-peek-item"><img src={item.image} alt={item.alt} loading="lazy" /><span>{item.name}</span></a>)}
     </div>
+  </section>
+  <section class="island-gallery" aria-labelledby="island-gallery-title">
+    <div class="island-gallery-copy">
+      <h2 id="island-gallery-title">{lang === 'ja' ? '島の風景を、\nもう少し。' : 'A little more of\nthe island.'}</h2>
+      <p>{lang === 'ja' ? '茶畑の道から、野生動物が暮らす大地まで。スリランカの風景を旅のイメージとしてご紹介します。' : 'From winding roads through tea country to the landscapes of Sri Lanka’s wildlife. These scenes are illustrative travel imagery.'}</p>
+    </div>
+    <figure class="island-gallery-photo island-gallery-photo--road">
+      <img src="/images/journey-road.webp" alt={lang === 'ja' ? '朝もやの光に包まれたスリランカ高原の茶畑と曲がりくねる道' : 'A winding road through Sri Lankan tea country in the morning light'} loading="lazy" />
+      <figcaption>{lang === 'ja' ? '高原を走る道' : 'A road through the highlands'}</figcaption>
+    </figure>
+    <figure class="island-gallery-photo island-gallery-photo--safari">
+      <img src="/images/yala-safari.webp" alt={lang === 'ja' ? '夕暮れの草原で野生の象を眺めるサファリのイメージ' : 'An illustrative safari scene with a wild elephant at sunset'} loading="lazy" />
+      <figcaption>{lang === 'ja' ? '野生動物に出会う風景' : 'Wildlife at dusk'}</figcaption>
+    </figure>
   </section>
   <p class="atlas-disclaimer">{t.disclaimer}</p>
 </section>

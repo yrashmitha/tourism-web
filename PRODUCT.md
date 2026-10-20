@@ -25,13 +25,14 @@ Showcase a client's travel and tour guide business and its tour packages. Help v
 - The experience must be fully responsive and designed mobile-first for Japanese visitors using phones.
 - The client wants the page set represented by the Travel with Sampath reference: Home, Packages, Services, and Contact. This is a reference for page scope and content organization, not a source for copied claims or media.
 - The client has supplied package and business details to the user through WhatsApp. Those details will be reviewed later and are not yet available in this project.
-- Business name, contact number, destinations actually served, itineraries, prices, inclusions, and exact tour style are open decisions pending that review.
-- Whether the operator provides Japanese-speaking guides or Japanese-language WhatsApp support is unconfirmed.
+- Confirmed business name: Master Lanka Travels. Confirmed address: No 187/90/A Lurdu Mawatha, Thewaththa Rd, Ragama.
+- The owner confirms a Japanese person on the team will accompany guests and guide them. Confirm availability for the visitor's chosen dates before finalizing a trip.
+- The WhatsApp contact number, destinations actually served, itineraries, prices, inclusions, and exact tour style remain open pending review.
 - Content maintenance workflow is not yet agreed.
 
 ## Brand Commitments
 
-The business name and existing identity are not yet known. The user wants the website to feel premium, with animation and custom generated imagery. Agree the design, colors, and fonts with the user before implementing the website.
+The business identity is Master Lanka Travels. The user wants the website to feel premium, with animation and custom generated imagery. The approved visual direction is documented in DESIGN.md.
 
 ## Evidence on Hand
 

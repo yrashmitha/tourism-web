@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InteriorHero from './InteriorHero.astro';
 import WhatsAppLink from './WhatsAppLink.astro';
-import { copy, type Language } from '../data/site';
+import { copy, site, type Language } from '../data/site';
 const { lang = 'ja', page = 'contact' } = Astro.props as { lang?: Language; page?: 'contact' };
 const t = copy[lang];
 ---
@@ -10,8 +10,8 @@ const t = copy[lang];
   <main id="main" class="interior-main">
     <InteriorHero lang={lang} page={page} />
     <section class="contact-section section-pad">
-      <div class="contact-card" data-reveal><h2>{lang === 'ja' ? 'まずは、気軽にひとこと。' : 'Start with a simple hello.'}</h2><p>{lang === 'ja' ? '行き先が決まっていなくても大丈夫です。気になる場所や旅の時期など、決まっていることからお聞かせください。' : 'You do not need to have every detail figured out. Tell us what places you are curious about or when you hope to travel.'}</p><WhatsAppLink lang={lang} label={t.cta} /><small>{t.note}</small></div>
-      <div class="contact-side" data-reveal><img src="/images/heritage-scene.webp" alt={lang === 'ja' ? 'スリランカの歴史ある岩山の風景' : 'Sri Lankan heritage landscape'} loading="lazy" /><p>{lang === 'ja' ? '海、緑、歴史。旅のきっかけを聞かせてください。' : 'Coast, highlands, heritage. Tell us what starts your journey.'}</p></div>
+      <div class="contact-card" data-reveal><h2>{lang === 'ja' ? 'まずは、気軽にひとこと。' : 'Start with a simple hello.'}</h2><p>{lang === 'ja' ? '行き先が決まっていなくても大丈夫です。気になる場所や旅の時期など、決まっていることからお聞かせください。' : 'You do not need to have every detail figured out. Tell us what places you are curious about or when you hope to travel.'}</p><p class="contact-guide">{lang === 'ja' ? '日本人スタッフが旅に同行し、ご案内します。' : 'A Japanese team member will travel with you and guide you.'}</p><WhatsAppLink lang={lang} label={t.cta} /><small>{t.note}</small></div>
+      <div class="contact-side" data-reveal><img src="/images/heritage-scene.webp" alt={lang === 'ja' ? 'スリランカの歴史ある岩山の風景' : 'Sri Lankan heritage landscape'} loading="lazy" /><p>{lang === 'ja' ? '海、緑、歴史。旅のきっかけを聞かせてください。' : 'Coast, highlands, heritage. Tell us what starts your journey.'}</p><address>{site.address}</address></div>
     </section>
   </main>
 </BaseLayout>

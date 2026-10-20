@@ -13,11 +13,11 @@ Create a production build with `npm run build`; preview it with `npm run preview
 
 ## Client details to update before launch
 
-- Replace the temporary descriptor and blank WhatsApp number in `src/data/site.ts`. Enter the number in international format using digits only, without `+` or spaces.
+- The confirmed business name and address are in `src/data/site.ts`. Add the client's WhatsApp number there in international format using digits only, without `+` or spaces.
 - Review the Japanese and English package descriptions in `src/components/DetailPage.astro`. The four tour outlines are paraphrased from [Travel with Sampath's public Packages page](https://travelwithsampath.com/packages/) for this client presentation. Confirm the client's routes, day-by-day schedule, included items, exclusions and current availability before publishing.
-- Confirm which services are actually provided and whether Japanese-language guiding or support is available.
+- The owner confirmed a Japanese member of the team will accompany and guide guests. Confirm availability for the travel dates when discussing an itinerary.
 - Replace, reorder or add package entries in the same component as the client provides confirmed content. Prices are intentionally omitted until supplied.
-- The route map and generated destination images are illustrative design assets; they are not photographs of the client, staff or vehicles.
+- The route map and generated destination images are illustrative design assets, not photographs of the client, staff, vehicles or actual tours.
 
 ## Visual system
 

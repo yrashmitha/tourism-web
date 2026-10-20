@@ -7,6 +7,7 @@
 .atlas-copy h1 { max-width: 11.5em; margin: 0; white-space: pre-line; font-family: 'Noto Serif JP', serif; font-size: clamp(2.45rem, 3.5vw, 3.55rem); font-weight: 500; line-height: 1.11; letter-spacing: -.035em; }
 .atlas-english-title { max-width: 23ch; margin: .28em 0 .48em; font-family: 'Sofia', 'Noto Serif JP', serif; font-size: clamp(1.2rem, 1.7vw, 1.65rem); line-height: 1.35; }
 .atlas-introduction { max-width: 40ch; margin: 0; white-space: pre-line; color: #2e4652; font-size: clamp(.88rem, 1.07vw, 1rem); line-height: 1.8; }
+.atlas-guide-note { margin: .65rem 0 0; color: #285f52; font-size: clamp(.78rem, .9vw, .88rem); font-weight: 600; line-height: 1.6; }
 .atlas-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .75rem; margin-top: 1rem; }
 .atlas-whatsapp { width: min(100%, 23rem); min-height: 58px; font-size: clamp(.8rem, .95vw, .9rem); }
 .atlas-packages { min-height: 44px; padding: .58em 1em; font-size: .79rem; }
@@ -74,6 +75,15 @@
 .featured-peek-item img { width: 100%; height: clamp(7rem, 15vw, 13rem); object-fit: cover; }
 .featured-peek-item span { padding: .38rem 0; font-family: 'Sofia', 'Noto Serif JP', serif; font-size: 1rem; }
 .atlas-disclaimer { max-width: 86ch; margin: 1.4rem auto 2rem; padding-inline: 1rem; color: #40575f; font-size: .74rem; line-height: 1.7; text-align: center; }
+.island-gallery { display: grid; grid-template-columns: minmax(190px, .76fr) minmax(0, 1.15fr) minmax(0, 1.15fr); align-items: start; gap: clamp(1rem, 2vw, 2rem); margin: clamp(3rem, 7vw, 6rem) 5.2% 2rem; padding-top: clamp(1.5rem, 3vw, 2.5rem); border-top: 1px solid #c8cdc5; }
+.island-gallery-copy { padding: .4rem 1rem .5rem 0; }
+.island-gallery-copy h2 { margin: 0; font-family: 'Noto Serif JP', serif; font-size: clamp(1.65rem, 2.6vw, 2.65rem); font-weight: 400; line-height: 1.4; white-space: pre-line; }
+.island-gallery-copy p { max-width: 34ch; margin: 1rem 0 0; color: #40575f; font-size: .85rem; line-height: 1.9; }
+.island-gallery-photo { min-width: 0; margin: 0; }
+.island-gallery-photo img { width: 100%; height: clamp(13rem, 24vw, 23rem); object-fit: cover; }
+.island-gallery-photo--road img { object-position: 45% center; }
+.island-gallery-photo--safari img { object-position: 58% center; }
+.island-gallery-photo figcaption { margin-top: .55rem; color: #3e7566; font-family: 'Sofia', 'Noto Serif JP', serif; font-size: 1rem; line-height: 1.6; }
 
 @media (min-width: 901px) and (max-height: 760px) {
   .atlas-map-field { aspect-ratio: 1081 / 789; }
@@ -137,6 +147,7 @@
   .atlas-copy h1 { max-width: 12ch; font-size: clamp(2.18rem, 9.8vw, 2.8rem); line-height: 1.13; }
   .atlas-english-title { margin: .25em 0 .42em; font-size: clamp(1.08rem, 5.3vw, 1.35rem); line-height: 1.42; }
   .atlas-introduction { max-width: 44ch; font-size: .88rem; line-height: 1.75; }
+  .atlas-guide-note { max-width: 42ch; margin-top: .55rem; font-size: .8rem; }
   .atlas-actions { align-items: stretch; gap: .52rem; margin-top: .85rem; }
   .atlas-whatsapp { width: 100%; max-width: 23rem; min-height: 48px; }
   .atlas-packages { min-height: 42px; }
@@ -175,6 +186,12 @@
   .featured-peek-item img { height: clamp(5.2rem, 26vw, 8rem); }
   .featured-peek-item span { font-size: .78rem; }
   .atlas-disclaimer { margin: 1rem auto 1.5rem; padding-inline: 6%; font-size: .68rem; text-align: left; }
+  .island-gallery { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 1rem; margin: 2.5rem 5.2% 1.5rem; }
+  .island-gallery-copy { grid-column: 1 / -1; }
+  .island-gallery-copy h2 { font-size: 1.6rem; }
+  .island-gallery-copy p { margin-top: .65rem; font-size: .78rem; }
+  .island-gallery-photo img { height: clamp(8rem, 35vw, 12rem); }
+  .island-gallery-photo figcaption { font-size: .78rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

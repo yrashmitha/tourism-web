@@ -3,7 +3,7 @@ import { copy, pagePath, site, type Language, type PageKey, whatsappUrl } from '
 import '../styles/global.css';
 const { lang = 'ja', page = 'home', title } = Astro.props as { lang?: Language; page?: PageKey; title?: string };
 const t = copy[lang];
-const titleText = title ?? `${page === 'home' ? site.name : t.pages[page].label} | Sri Lanka`;
+const titleText = title ?? `${page === 'home' ? site.name : t.pages[page].label} | ${site.name}`;
 const switchLanguage = lang === 'ja' ? 'en' : 'ja';
 const switchText = lang === 'ja' ? 'EN' : '日本語';
 const whatsapp = whatsappUrl(lang);
@@ -50,7 +50,7 @@ const whatsapp = whatsappUrl(lang);
     <slot />
     <footer class="site-footer">
       <a class="brand footer-brand" href={pagePath(lang, 'home')}>{site.name}</a>
-      <p>{t.footer}</p>
+      <p>{t.footer}<br /><span class="footer-address">{site.address}</span></p>
       <div class="footer-links">{(['packages', 'services', 'about', 'contact'] as PageKey[]).map((key) => <a href={pagePath(lang, key)}>{t.pages[key].label}</a>)}</div>
       <span class="copyright">© {new Date().getFullYear()} · Sri Lanka</span>
     </footer>

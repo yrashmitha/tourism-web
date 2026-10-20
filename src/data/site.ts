@@ -1,6 +1,6 @@
 export const site = {
-  // Temporary descriptor; replace it with the client's business name before launch.
-  name: 'Sri Lanka · Local Guided Journeys',
+  name: 'Master Lanka Travels',
+  address: 'No 187/90/A Lurdu Mawatha, Thewaththa Rd, Ragama',
   // Replace with the client's WhatsApp number in international format (digits only).
   whatsappNumber: '',
 };
@@ -19,6 +19,7 @@ export const copy = {
     nav: ['ホーム', '旅のパッケージ', '旅のサービス', '私たちについて', 'お問い合わせ'],
     navEn: ['HOME', 'PACKAGES', 'SERVICES', 'ABOUT', 'CONTACT'],
     whatsapp: 'WhatsAppで旅を相談',
+    guideNote: '日本人スタッフが旅に同行し、ご案内します。',
     heroJa: 'スリランカの旅を、\nひとつの地図から。',
     heroEn: 'Find your way through Sri Lanka.',
     intro: '海、緑、歴史がつながる、ひとつの島の旅。\n地図をたよりに、あなただけのスリランカを見つけてみませんか。',
@@ -47,6 +48,7 @@ export const copy = {
     nav: ['Home', 'Packages', 'Services', 'About', 'Contact'],
     navEn: ['HOME', 'PACKAGES', 'SERVICES', 'ABOUT', 'CONTACT'],
     whatsapp: 'Plan on WhatsApp',
+    guideNote: 'A Japanese team member will travel with you and guide you.',
     heroJa: 'Find a Sri Lanka journey,\none map at a time.',
     heroEn: 'A journey shaped around your island story.',
     intro: 'Coast, highlands and heritage, connected across one island.\nLet the map lead you to a Sri Lanka that feels like your own.',
