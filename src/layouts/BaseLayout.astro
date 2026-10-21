@@ -3,7 +3,27 @@ import { copy, pagePath, site, type Language, type PageKey, whatsappUrl } from '
 import '../styles/global.css';
 const { lang = 'ja', page = 'home', title } = Astro.props as { lang?: Language; page?: PageKey; title?: string };
 const t = copy[lang];
-const titleText = title ?? `${page === 'home' ? site.name : t.pages[page].label} | ${site.name}`;
+const homeSeo = lang === 'ja'
+  ? { title: `日本人スタッフ同行のスリランカ旅行 | ${site.name}`, description: '海岸、高原、歴史ある街をめぐるスリランカ旅行。日本人スタッフが同行してご案内します。日程に合わせた旅の相談はWhatsAppへ。' }
+  : { title: `Sri Lanka Tours with a Japanese Team Member | ${site.name}`, description: 'Explore Sri Lanka’s coast, highlands and historic sites with Master Lanka Travels. A Japanese team member accompanies and guides guests; ask about your dates on WhatsApp.' };
+const titleText = title ?? (page === 'home' ? homeSeo.title : `${t.pages[page].title} | ${site.name}`);
+const descriptionText = page === 'home' ? homeSeo.description : t.pages[page].subtitle.replaceAll('\n', ' ');
+const canonicalUrl = Astro.site ? new URL(pagePath(lang, page), Astro.site).href : undefined;
+const japaneseUrl = Astro.site ? new URL(pagePath('ja', page), Astro.site).href : undefined;
+const englishUrl = Astro.site ? new URL(pagePath('en', page), Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL('/images/gallery-sigiriya.webp', Astro.site).href : undefined;
+const businessSchema = Astro.site ? {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  name: site.name,
+  url: new URL('/', Astro.site).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'No 187/90/A Lurdu Mawatha, Thewaththa Rd',
+    addressLocality: 'Ragama',
+    addressCountry: 'LK',
+  },
+} : undefined;
 const switchLanguage = lang === 'ja' ? 'en' : 'ja';
 const switchText = lang === 'ja' ? 'EN' : '日本語';
 const whatsapp = whatsappUrl(lang);
@@ -14,12 +34,26 @@ const whatsapp = whatsappUrl(lang);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f3ec" />
-    <meta name="description" content={t.intro.replace('\n', ' ')} />
+    <meta name="description" content={descriptionText} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {japaneseUrl && <link rel="alternate" hreflang="ja" href={japaneseUrl} />}
+    {englishUrl && <link rel="alternate" hreflang="en" href={englishUrl} />}
     <meta property="og:title" content={titleText} />
-    <meta property="og:description" content={t.intro.replace('\n', ' ')} />
+    <meta property="og:description" content={descriptionText} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_US'} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content={lang === 'ja' ? '朝霧に浮かぶスリランカのシーギリヤ・ロック' : 'Sigiriya Rock rising above the morning mist in Sri Lanka'} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titleText} />
+    <meta name="twitter:description" content={descriptionText} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{titleText}</title>
+    {businessSchema && <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600&family=Sofia&display=swap" rel="stylesheet" />
