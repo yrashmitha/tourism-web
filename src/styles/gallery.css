@@ -16,9 +16,10 @@
 .gallery-feature figcaption span:last-child { color: #53676c; font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; }
 .gallery-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(14rem, 21vw, 22rem); gap: clamp(.85rem, 1.55vw, 1.4rem); width: min(100% - 8%, 1520px); margin: 0 auto; }
 .gallery-item { min-width: 0; margin: 0; }
-.gallery-item--nine-arch { grid-column: span 7; grid-row: span 2; }
-.gallery-item--galle-fort, .gallery-item--yala, .gallery-item--kandy, .gallery-item--mirissa { grid-column: span 5; }
-.gallery-item--coast, .gallery-item--horton-plains { grid-column: span 7; }
+.gallery-item--nine-arch, .gallery-item--anuradhapura { grid-column: span 7; grid-row: span 2; }
+.gallery-item--galle-fort, .gallery-item--yala, .gallery-item--kandy, .gallery-item--mirissa, .gallery-item--dambulla, .gallery-item--polonnaruwa { grid-column: span 5; }
+.gallery-item--coast, .gallery-item--horton-plains, .gallery-item--nuwara-eliya { grid-column: span 7; }
+.gallery-item--trincomalee { grid-column: 1 / -1; }
 .gallery-view { position: relative; display: block; width: 100%; height: calc(100% - 2rem); padding: 0; overflow: hidden; border: 0; background: #e2e4dc; color: inherit; cursor: zoom-in; text-align: left; }
 .gallery-view img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.16,1,.3,1); }
 .gallery-item--nine-arch .gallery-view img { object-position: center 58%; }
@@ -28,6 +29,11 @@
 .gallery-item--kandy .gallery-view img { object-position: center 58%; }
 .gallery-item--horton-plains .gallery-view img { object-position: center 48%; }
 .gallery-item--mirissa .gallery-view img { object-position: center 55%; }
+.gallery-item--anuradhapura .gallery-view img { object-position: center 48%; }
+.gallery-item--dambulla .gallery-view img { object-position: center 52%; }
+.gallery-item--polonnaruwa .gallery-view img { object-position: center 52%; }
+.gallery-item--nuwara-eliya .gallery-view img { object-position: center 55%; }
+.gallery-item--trincomalee .gallery-view img { object-position: center 48%; }
 .gallery-view:hover img, .gallery-view:focus-visible img { transform: scale(1.025); }
 .gallery-expand { position: absolute; right: .8rem; bottom: .8rem; display: grid; width: 2.7rem; aspect-ratio: 1; place-items: center; border: 1px solid rgba(23,45,59,.45); background: var(--gallery-paper); color: var(--gallery-ink); transition: color .2s ease, background .2s ease; }
 .gallery-expand svg { width: 1rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
@@ -57,8 +63,9 @@
   .gallery-hero-copy { padding-left: 0; }
   .gallery-hero h1 { font-size: clamp(3.4rem, 7.2vw, 5rem); }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(15rem, 35vw, 24rem); }
-  .gallery-item--nine-arch, .gallery-item--galle-fort, .gallery-item--yala, .gallery-item--coast, .gallery-item--kandy, .gallery-item--horton-plains, .gallery-item--mirissa { grid-column: auto; grid-row: auto; }
+  .gallery-item--nine-arch, .gallery-item--galle-fort, .gallery-item--yala, .gallery-item--coast, .gallery-item--kandy, .gallery-item--horton-plains, .gallery-item--mirissa, .gallery-item--anuradhapura, .gallery-item--dambulla, .gallery-item--polonnaruwa, .gallery-item--nuwara-eliya { grid-column: auto; grid-row: auto; }
   .gallery-item--nine-arch { grid-column: 1 / -1; }
+  .gallery-item--trincomalee { grid-column: 1 / -1; }
   .gallery-lightbox { padding-inline: 3.7rem; }
   .gallery-previous { left: .35rem; }.gallery-next-image { right: .35rem; }
 }
@@ -76,7 +83,7 @@
   .gallery-feature figcaption { padding-top: .55rem; font-size: .78rem; }
   .gallery-feature figcaption span:last-child { font-size: .68rem; }
   .gallery-grid { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; gap: 1.5rem; width: min(100% - 10%, 1520px); }
-  .gallery-item--nine-arch, .gallery-item--galle-fort, .gallery-item--yala, .gallery-item--coast, .gallery-item--kandy, .gallery-item--horton-plains, .gallery-item--mirissa { grid-column: 1; }
+  .gallery-item--nine-arch, .gallery-item--galle-fort, .gallery-item--yala, .gallery-item--coast, .gallery-item--kandy, .gallery-item--horton-plains, .gallery-item--mirissa, .gallery-item--anuradhapura, .gallery-item--dambulla, .gallery-item--polonnaruwa, .gallery-item--nuwara-eliya, .gallery-item--trincomalee { grid-column: 1; }
   .gallery-view { height: auto; aspect-ratio: 1.18; }
   .gallery-item--coast .gallery-view { aspect-ratio: 1.3; }
   .gallery-item figcaption { min-height: 1.8rem; font-size: .84rem; }
