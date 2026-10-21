@@ -34,7 +34,7 @@ const whatsapp = whatsappUrl(lang);
         <span></span><span></span>
       </button>
       <nav class="primary-nav" id="primary-nav" aria-label={lang === 'ja' ? 'メインナビゲーション' : 'Main navigation'}>
-        {(['home', 'packages', 'services', 'about', 'contact'] as PageKey[]).map((key, i) => (
+        {(['home', 'packages', 'gallery', 'services', 'about', 'contact'] as PageKey[]).map((key, i) => (
           <a class:list={['nav-link', page === key && 'is-active']} href={pagePath(lang, key)} aria-current={page === key ? 'page' : undefined}>
             <span>{t.nav[i]}</span><small>{t.navEn[i]}</small>
           </a>
@@ -51,7 +51,7 @@ const whatsapp = whatsappUrl(lang);
     <footer class="site-footer">
       <a class="brand footer-brand" href={pagePath(lang, 'home')}>{site.name}</a>
       <p>{t.footer}<br /><span class="footer-address">{site.address}</span></p>
-      <div class="footer-links">{(['packages', 'services', 'about', 'contact'] as PageKey[]).map((key) => <a href={pagePath(lang, key)}>{t.pages[key].label}</a>)}</div>
+      <div class="footer-links">{(['packages', 'gallery', 'services', 'about', 'contact'] as PageKey[]).map((key) => <a href={pagePath(lang, key)}>{t.pages[key].label}</a>)}</div>
       <span class="copyright">© {new Date().getFullYear()} · Sri Lanka</span>
     </footer>
     <script>

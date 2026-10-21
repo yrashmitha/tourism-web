@@ -16,8 +16,8 @@ export function whatsappUrl(language: 'ja' | 'en', message?: string) {
 
 export const copy = {
   ja: {
-    nav: ['ホーム', '旅のパッケージ', '旅のサービス', '私たちについて', 'お問い合わせ'],
-    navEn: ['HOME', 'PACKAGES', 'SERVICES', 'ABOUT', 'CONTACT'],
+    nav: ['ホーム', '旅のパッケージ', 'ギャラリー', '旅のサービス', '私たちについて', 'お問い合わせ'],
+    navEn: ['HOME', 'PACKAGES', 'GALLERY', 'SERVICES', 'ABOUT', 'CONTACT'],
     whatsapp: 'WhatsAppで旅を相談',
     guideNote: '日本人スタッフが旅に同行し、ご案内します。',
     heroJa: 'スリランカの旅を、\nひとつの地図から。',
@@ -36,6 +36,7 @@ export const copy = {
     disclaimer: '地図のルートと地域は旅のイメージです。実際の行程はご希望に合わせてご相談ください。',
     pages: {
       packages: { title: 'あなたらしい旅を、島の地図から。', subtitle: '海岸線も、高原も、歴史の街も。気になる場所を起点に、旅のかたちを一緒に考えます。', label: '旅のパッケージ', en: 'JOURNEYS' },
+      gallery: { title: 'スリランカの風景', subtitle: '海、高原、森。島の風景をゆっくり眺めるギャラリー。', label: 'ギャラリー', en: 'GALLERY' },
       services: { title: '旅の時間を、心地よく。', subtitle: '行き先をつなぐ道のりから、島で過ごすひとときまで。旅の相談はWhatsAppから。', label: '旅のサービス', en: 'HOW WE TRAVEL' },
       about: { title: '旅の景色も、過ごし方も。', subtitle: 'あなたのペースで、島の魅力に出会う旅を。', label: '私たちについて', en: 'ABOUT US' },
       contact: { title: '旅のことを、気軽に相談。', subtitle: '行きたい場所や過ごし方をお聞かせください。WhatsAppでご相談いただけます。', label: 'お問い合わせ', en: 'LET’S TALK' },
@@ -45,8 +46,8 @@ export const copy = {
     footer: 'スリランカの旅を、ひとつの地図から。',
   },
   en: {
-    nav: ['Home', 'Packages', 'Services', 'About', 'Contact'],
-    navEn: ['HOME', 'PACKAGES', 'SERVICES', 'ABOUT', 'CONTACT'],
+    nav: ['Home', 'Packages', 'Gallery', 'Services', 'About', 'Contact'],
+    navEn: ['HOME', 'PACKAGES', 'GALLERY', 'SERVICES', 'ABOUT', 'CONTACT'],
     whatsapp: 'Plan on WhatsApp',
     guideNote: 'A Japanese team member will travel with you and guide you.',
     heroJa: 'Find a Sri Lanka journey,\none map at a time.',
@@ -65,6 +66,7 @@ export const copy = {
     disclaimer: 'The route and place markers are illustrative. Your actual itinerary can be discussed around your interests.',
     pages: {
       packages: { title: 'Start with the places that move you.', subtitle: 'From the coast to tea country and historic towns, we can shape a trip around the places you want to discover.', label: 'Journey ideas', en: 'JOURNEYS' },
+      gallery: { title: 'Sri Lanka in pictures', subtitle: 'Coast, highlands and forest. Take a slower look around the island.', label: 'Gallery', en: 'GALLERY' },
       services: { title: 'Make more room for the journey.', subtitle: 'From the roads between destinations to the moments you spend on the island, start the conversation on WhatsApp.', label: 'Travel services', en: 'HOW WE TRAVEL' },
       about: { title: 'An island to discover. A journey of your own.', subtitle: 'A more personal approach to exploring Sri Lanka, shaped around your pace.', label: 'About us', en: 'ABOUT US' },
       contact: { title: 'Let’s talk about Sri Lanka.', subtitle: 'Share the places and experiences you have in mind. Start a conversation on WhatsApp.', label: 'Contact', en: 'LET’S TALK' },
@@ -76,7 +78,7 @@ export const copy = {
 } as const;
 
 export type Language = keyof typeof copy;
-export type PageKey = 'home' | 'packages' | 'services' | 'about' | 'contact';
+export type PageKey = 'home' | 'packages' | 'gallery' | 'services' | 'about' | 'contact';
 
 export function pagePath(language: Language, page: PageKey) {
   const localPath = page === 'home' ? '/' : `/${page}/`;

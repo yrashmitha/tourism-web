@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pagePath, type Language } from '../data/site';
+import '../styles/gallery.css';
+
+const { lang = 'ja' } = Astro.props as { lang?: Language };
+const ja = lang === 'ja';
+const photos = [
+  { id: 'sigiriya', src: '/images/gallery-sigiriya.webp', title: ja ? '朝霧に浮かぶシーギリヤ・ロック' : 'Sigiriya rising above the morning mist', alt: ja ? '朝日のなか、緑の森からそびえるシーギリヤ・ロックのイメージ' : 'An AI-generated view of Sigiriya Rock rising above misty green forest at sunrise', shape: 'sigiriya' },
+  { id: 'nine-arch', src: '/images/gallery-nine-arch.webp', title: ja ? 'エッラのナインアーチブリッジ' : 'Nine Arch Bridge, Ella', alt: ja ? '緑豊かな丘の石橋を青い列車が渡るイメージ' : 'An AI-generated view of a blue train crossing the Nine Arch Bridge in Ella', shape: 'nine-arch' },
+  { id: 'galle-fort', src: '/images/gallery-galle-fort.webp', title: ja ? '夕暮れのゴール・フォート' : 'Galle Fort at sunset', alt: ja ? 'インド洋を望むゴール・フォートの灯台と城壁のイメージ' : 'An AI-generated view of Galle Fort lighthouse and ramparts beside the Indian Ocean at sunset', shape: 'galle-fort' },
+  { id: 'yala', src: '/images/gallery-yala-elephant.webp', title: ja ? 'ヤーラ国立公園の野生のゾウ' : 'A wild elephant in Yala National Park', alt: ja ? '夕方の草原を歩く野生のゾウのイメージ' : 'An AI-generated view of a wild elephant in Yala National Park at sunset', shape: 'yala' },
+  { id: 'coast', src: '/images/gallery-coast.webp', title: ja ? '南海岸、波のそばで' : 'The southern coast, by the water', alt: ja ? '青い海とヤシの木が続くスリランカ南海岸のイメージ' : 'An illustrative view of Sri Lanka’s southern coast, with blue water and palms', shape: 'coast' },
+];
+---
+
+<BaseLayout lang={lang} page="gallery">
+  <main id="main" class="gallery-page">
+    <header class="gallery-intro">
+      <h1>{ja ? 'スリランカの、\n風景をめぐる。' : 'Sri Lanka,\nin a new light.'}</h1>
+      <p>{ja ? '波のきらめきから、高原を渡る列車まで。\n島の表情を、一枚ずつゆっくり眺めてみませんか。' : 'From light along the shore to a train across the hills.\nTake your time with the many faces of the island.'}</p>
+    </header>
+
+    <section class="gallery-grid" aria-label={ja ? 'スリランカの風景写真ギャラリー' : 'Gallery of Sri Lankan landscapes'}>
+      {photos.map((photo, index) => (
+        <figure class={`gallery-item gallery-item--${photo.shape}`}>
+          <button class="gallery-view" type="button" data-gallery-index={index} aria-haspopup="dialog" aria-controls="gallery-lightbox" aria-label={ja ? `${photo.title}の画像を大きく見る` : `View ${photo.title} larger`}>
+            <img src={photo.src} alt={photo.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+            <span class="gallery-expand" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5" /></svg></span>
+          </button>
+          <figcaption>{photo.title}</figcaption>
+        </figure>
+      ))}
+    </section>
+
+    <p class="gallery-disclaimer">{ja ? '掲載画像は、実在するスリランカの名所や風景をもとにAIで作成したイメージです。実際の風景写真や、当社のスタッフ・車両・ツアーを撮影した写真ではありません。' : 'These AI-generated images are inspired by real Sri Lankan landmarks and landscapes. They are illustrations, not documentary photographs or photos of our team, vehicles or tours.'}</p>
+    <p class="gallery-next"><a href={pagePath(lang, 'packages')}>{ja ? '旅のアイデアを見る' : 'Explore journey ideas'}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a></p>
+
+    <dialog class="gallery-lightbox" id="gallery-lightbox" aria-label={ja ? '画像ビューアー' : 'Image viewer'}>
+      <button class="gallery-control gallery-close" type="button" aria-label={ja ? '閉じる' : 'Close image'}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+      <button class="gallery-control gallery-previous" type="button" aria-label={ja ? '前の画像' : 'Previous image'}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+      </button>
+      <figure class="lightbox-figure">
+        <img class="lightbox-image" alt="" />
+        <figcaption><span class="lightbox-caption"></span><span class="lightbox-count" aria-live="polite"></span></figcaption>
+      </figure>
+      <button class="gallery-control gallery-next-image" type="button" aria-label={ja ? '次の画像' : 'Next image'}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      </button>
+    </dialog>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ imageCount: photos.length }}>
+  const dialog = document.querySelector('#gallery-lightbox');
+  const image = dialog?.querySelector('.lightbox-image');
+  const caption = dialog?.querySelector('.lightbox-caption');
+  const count = dialog?.querySelector('.lightbox-count');
+  const thumbnails = [...document.querySelectorAll('.gallery-view')];
+  let current = 0;
+
+  const showImage = (index) => {
+    current = (index + thumbnails.length) % thumbnails.length;
+    const source = thumbnails[current].querySelector('img');
+    if (!source || !image || !caption || !count) return;
+    image.src = source.currentSrc || source.src;
+    image.alt = source.alt;
+    caption.textContent = thumbnails[current].closest('figure')?.querySelector('figcaption')?.textContent?.trim() ?? '';
+    count.textContent = `${current + 1} / ${imageCount}`;
+  };
+
+  thumbnails.forEach((button, index) => button.addEventListener('click', () => {
+    showImage(index);
+    dialog?.showModal();
+  }));
+  dialog?.querySelector('.gallery-close')?.addEventListener('click', () => dialog.close());
+  dialog?.querySelector('.gallery-previous')?.addEventListener('click', () => showImage(current - 1));
+  dialog?.querySelector('.gallery-next-image')?.addEventListener('click', () => showImage(current + 1));
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); showImage(current - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); showImage(current + 1); }
+  });
+</script>
